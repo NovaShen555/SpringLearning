@@ -13,11 +13,13 @@
         <module name="sping-di" />
         <module name="spring-helloworld" />
         <module name="spring-07-proxy" />
+        <module name="spring-10-aop" />
         <module name="spring-autowired" />
         <module name="spring-06-appconfig" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
+      <module name="spriing-10-aop" target="17" />
       <module name="spring-01-ioc-1&amp;2" target="17" />
       <module name="spring-08-proxy2" target="17" />
       <module name="spring-ioc-1" target="17" />

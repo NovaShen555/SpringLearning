@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:aop="http://www.springframework.org/schema/aop"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+        https://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/aop https://www.springframework.org/schema/aop/spring-aop.xsd">
+    <!--使用Spring配置文件创建对象-->
+    <!--注册bean-->
+    <bean id="userService" class="top.novashen.service.UserServiceImpl"/>
+    <bean id="log" class="top.novashen.log.BeforeLog"/>
+    <bean id="afterLog" class="top.novashen.log.AfterLog"/>
+    <bean id="diy" class="top.novashen.diy.DiyPointCut"/>
+
+    <!--配置AOP,需要导入约束<aop:config回车即可-->
+    <aop:config>
+        <!--需要一个切入点-->
+<!--        <aop:pointcut id="pc" expression="execution(* top.novashen.service.UserServiceImpl.*(..))"/>-->
+
+<!--        &lt;!&ndash;执行环绕增强服务&ndash;&gt;-->
+<!--        &lt;!&ndash;advice 就是你要新增的服务，继承了aop的接口&ndash;&gt;-->
+<!--        &lt;!&ndash;pointcut 就是被注入的切点，这个切点要在上下文注册过&ndash;&gt;-->
+<!--        <aop:advisor advice-ref="log" pointcut-ref="pc"/>-->
+<!--        <aop:advisor advice-ref="afterLog" pointcut-ref="pc"/>-->
+        <!--配置一个切面，引用diy这个bean去执行这个切面的一些方法-->
+        <aop:aspect id="asp" ref="diy">
+            <!--定义一个切点-->
+            <aop:pointcut id="pc" expression="execution(* top.novashen.service.UserServiceImpl.*(..))"/>
+            <!--执行环绕方法-->
+            <aop:before method="before" pointcut-ref="pc"/>
+            <aop:after method="after" pointcut-ref="pc"/>
+        </aop:aspect>
+
+    </aop:config>
+
+</beans>
