@@ -10,6 +10,12 @@
     <bean id="afterLog" class="top.novashen.log.AfterLog"/>
     <bean id="diy" class="top.novashen.diy.DiyPointCut"/>
 
+    <!--将切面类注册-->
+    <bean id="annotationPointCut" class="top.novashen.diy.AnnotationPointCut"/>
+    <!--配置自动注解-->
+    <aop:aspectj-autoproxy/>
+
+
     <!--配置AOP,需要导入约束<aop:config回车即可-->
     <aop:config>
         <!--需要一个切入点-->
@@ -20,12 +26,14 @@
 <!--        &lt;!&ndash;pointcut 就是被注入的切点，这个切点要在上下文注册过&ndash;&gt;-->
 <!--        <aop:advisor advice-ref="log" pointcut-ref="pc"/>-->
 <!--        <aop:advisor advice-ref="afterLog" pointcut-ref="pc"/>-->
-
-        <aop:aspect id="asp" ref="diy">
-            <aop:pointcut id="pc" expression="execution(* top.novashen.service.UserServiceImpl.*(..))"/>
-            <aop:before method="before" pointcut-ref="pc"/>
-            <aop:after method="after" pointcut-ref="pc"/>
-        </aop:aspect>
+        <!--配置一个切面，引用diy这个bean去执行这个切面的一些方法-->
+<!--        <aop:aspect id="asp" ref="diy">-->
+<!--            &lt;!&ndash;定义一个切点&ndash;&gt;-->
+<!--            <aop:pointcut id="pc" expression="execution(* top.novashen.service.UserServiceImpl.*(..))"/>-->
+<!--            &lt;!&ndash;执行环绕方法&ndash;&gt;-->
+<!--            <aop:before method="before" pointcut-ref="pc"/>-->
+<!--            <aop:after method="after" pointcut-ref="pc"/>-->
+<!--        </aop:aspect>-->
 
     </aop:config>
 
